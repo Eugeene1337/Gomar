@@ -1,0 +1,63 @@
+﻿html,
+body,
+header,
+#intro {
+    height: 100%;
+}
+
+#intro {
+    background: url("../img/bg.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.navbar {
+    font-size: 18px;
+}
+
+.brand {
+    font-size: 22px;
+}
+
+.bold {
+    border: 5px solid white;
+}
+
+.about-us {
+    padding-top: 3rem;
+    padding-bottom: 1rem;
+    background-color: white;
+}
+
+a.anchor {
+    display: block;
+    position: relative;
+    top: -90px;
+    visibility: hidden;
+}
+
+.description {
+    font-size: 17px;
+}
+
+.map-container-6 {
+    overflow: hidden;
+    padding-bottom: 56.25%;
+    position: relative;
+    height: 0;
+}
+
+    .map-container-6 iframe {
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+    }
+
+
+.width-auto {
+    width: auto;
+}
