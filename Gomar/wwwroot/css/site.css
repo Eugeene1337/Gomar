@@ -1,63 +1,70 @@
-﻿html,
-body,
-header,
-#intro {
-    height: 100%;
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
 }
 
-#intro {
-    background: url("../img/bg.jpg") no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+/* Provide sufficient contrast against white background */
+a {
+    color: #0366d6;
 }
 
-.navbar {
-    font-size: 18px;
+.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
-.brand {
-    font-size: 22px;
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
-.bold {
-    border: 5px solid white;
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    font-size: 14px;
 }
 
-.about-us {
-    padding-top: 3rem;
-    padding-bottom: 1rem;
-    background-color: white;
-}
-
-a.anchor {
-    display: block;
-    position: relative;
-    top: -90px;
-    visibility: hidden;
-}
-
-.description {
-    font-size: 17px;
-}
-
-.map-container-6 {
-    overflow: hidden;
-    padding-bottom: 56.25%;
-    position: relative;
-    height: 0;
-}
-
-    .map-container-6 iframe {
-        left: 0;
-        top: 0;
-        height: 100%;
-        width: 100%;
-        position: absolute;
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
     }
-
-
-.width-auto {
-    width: auto;
 }
+
+.border-top {
+    border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+    font-size: 1rem;
+    line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+
+.footer {
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
+}
+/*Custom styles
+-------------------------------------------------- */

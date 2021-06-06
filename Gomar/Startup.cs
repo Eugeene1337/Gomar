@@ -1,5 +1,7 @@
 using Gomar.Models;
 using Gomar.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -7,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,11 +34,33 @@ namespace Gomar
             services.AddSingleton<IDatabaseSettings>(x => x.GetRequiredService<IOptions<DatabaseSettings>>().Value);
             services.AddSingleton<ProductService>();
 
-            //services.AddAuthentication(options =>
-            //{
-             //   options.DefaultScheme = CookieAuthentificationDefaults
-            //})
-
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+            })
+                .AddCookie()
+                .AddOpenIdConnect(options =>
+                {
+                    options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                    options.Authority = Configuration["Okta:Domain"] + "/oauth2/default";
+                    options.RequireHttpsMetadata = true;
+                    options.ClientId = Configuration["Okta:ClientId"];
+                    options.ClientSecret = Configuration["Okta:ClientSecret"];
+                    options.ResponseType = OpenIdConnectResponseType.Code;
+                    options.GetClaimsFromUserInfoEndpoint = true;
+                    options.Scope.Add("openid");
+                    options.Scope.Add("profile");
+                    options.SaveTokens = true;
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        NameClaimType = "name",
+                        RoleClaimType = "groups",
+                        ValidateIssuer = true
+                    };
+                   
+                });
+            services.AddAuthorization();
             services.AddControllersWithViews();
         }
 
@@ -56,6 +82,7 @@ namespace Gomar
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
