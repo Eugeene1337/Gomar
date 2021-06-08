@@ -1,4 +1,5 @@
 ﻿using Gomar.Models;
+using Gomar.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,15 +13,27 @@ namespace Gomar.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly MontageService _montageService;
+        public HomeController(ILogger<HomeController> logger, MontageService montageService)
         {
+            _montageService = montageService;
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public ActionResult<IList<Montage>> Index()
         {
-            return View();
+            var montages = _montageService.Read()
+                .Select(x => new Montage()
+                {
+                    Id = x.Id,
+                    ImageName = x.ImageName,
+                    ImageSrc = String.Format("{0}://{1}{2}/img/{3}", Request.Scheme, Request.Host, Request.PathBase, x.ImageName)
+                })
+                .ToList();
+            int rows = montages.Count % 3 == 0 ? montages.Count / 3 : montages.Count / 3 + 1;
+            ViewData["Rows"] = rows;
+
+            return View(montages);
         }
 
         public IActionResult Privacy()

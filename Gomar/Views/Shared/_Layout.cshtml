@@ -3,24 +3,23 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="img/logo.ico" type="image/x-icon" />
+    <link rel="icon" href="~/img/logo.png" type="image/x-icon" />
     <title>GOMAR - okna, drzwi, bramy, rolety</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
     <!-- Google Fonts Roboto -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" />
     <!-- MDB -->
-    <link rel="stylesheet" href="css/mdb.min.css" />
-    @RenderSection("Styles", required: false)
+    <link rel="stylesheet" href="~/css/mdb.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow fixed-top">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="brand navbar-brand ms-5" style="font-size: 22px;" asp-area="" asp-controller="Home" asp-action="Index">
-                    <img src="img/logo.png" height="55" alt="Gomar" />
+                    <img src="~/img/logo.png" height="55" alt="Gomar" />
                     Marcin Górka
                 </a>
                 <!-- Toggle button -->
@@ -31,7 +30,7 @@
                 <div class="navbar-collapse collapse justify-content-between " style="font-size: 18px;">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Products</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Montage" asp-action="Index">Montaże</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Nasze realizacje</a>
@@ -43,13 +42,44 @@
         </nav>
     </header>
 
-    <main role="main" class="">
-        @RenderBody()
-    </main>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <!--Footer-->
+    <footer class="bg-dark text-center text-white footer">
+        <!-- Grid container -->
+        <div class="container p-4 pb-0">
+            <!-- Section: Social media -->
+            <section class="mb-4">
 
-    
+                <!-- Facebook -->
+                <a class="btn btn-outline-light btn-floating mx-5" href="https://www.facebook.com/oknagomar/" role="button">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+
+                <a class="text-white mx-5"><i class="fas fa-phone-alt"></i> 577 399 488</a>
+
+                <a class="text-white mx-5"><i class="fas fa-envelope"></i> biuro@oknagomar.pl</a>
+
+                <a class="text-white mx-5"><i class="fas fa-map-marker-alt"></i> Wrocław</a>
+
+
+            </section>
+            <!-- Section: Social media -->
+        </div>
+        <!-- Grid container -->
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2021 Copyright:
+            <a class="text-white" href="https://mdbootstrap.com/">OknaGomar.pl</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!--Footer-->
     <!-- MDB -->
-    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <script src="~/js/mdb.min.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

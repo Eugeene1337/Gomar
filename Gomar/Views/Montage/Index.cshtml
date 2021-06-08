@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Gomar.Models.Montage>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Nasze realizacje</h1>
+
+<p>
+    <button type="button" class="btn btn-primary"  onclick="location.href='@Url.Action("Create", "Montage")'">
+        <i class="fas fa-plus"></i> Dodaj
+    </button>
+</p>
+<table class="table">
+    <thead table-light>
+        <tr>
+            <th>
+                <a>Obraz</a>
+            </th>
+            <th>
+                <a>Nazwa</a>
+            </th>
+            <th>
+                <a>Ścieżka</a>
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                <p><img style='width:200px; height:150px;' src="@Url.Content(item.ImageSrc)"></p>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ImageName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ImageSrc)
+            </td>
+
+            <td>
+                <button type="button" class="btn btn-warning btn-sm px-3 py-2" onclick="location.href='@Url.Action("Edit", "Montage", new { @id = item.Id } )'">
+                    Edytuj <i class="fas fa-edit"></i>
+                </button> 
+                <button type="button" class="btn btn-danger btn-sm px-3 py-2" onclick="location.href='@Url.Action("Delete", "Montage", new { @id = item.Id } )'">
+                    Usuń <i class="fas fa-times"></i>
+                </button>
+
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+
+
