@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Gomar.Models.Product>
+
+@{
+    ViewData["Title"] = "View";
+}
+
+<h1>Rolety</h1>
+
+
+@foreach (var item in Model)
+{
+    <div class="row" style="background-color: #f8f8f8; ">
+        <div class="col-lg-4 col-md-12 mb-4">
+            <p><img style='width:400px;' src="@Url.Content(item.ImageSrc)"></p>
+        </div>
+        <div class="col-lg-8">
+            <br /><br />
+            <h4 class="text-dark">@Html.DisplayFor(modelItem => item.Name)</h4>
+            <p class="text-dark">@Html.DisplayFor(modelItem => item.Description)</p>
+        </div>
+    </div>
+    <br />
+}

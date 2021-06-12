@@ -14,9 +14,14 @@ namespace Gomar.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly MontageService _montageService;
-        public HomeController(ILogger<HomeController> logger, MontageService montageService)
+        private readonly ProductService _productService;
+        private readonly TextService _textService;
+        
+        public HomeController(ILogger<HomeController> logger, MontageService montageService, ProductService productService, TextService textService)
         {
             _montageService = montageService;
+            _productService = productService;
+            _textService = textService;
             _logger = logger;
         }
 
@@ -30,11 +35,96 @@ namespace Gomar.Controllers
                     ImageSrc = String.Format("{0}://{1}{2}/img/{3}", Request.Scheme, Request.Host, Request.PathBase, x.ImageName)
                 })
                 .ToList();
-            int rows = montages.Count % 3 == 0 ? montages.Count / 3 : montages.Count / 3 + 1;
-            ViewData["Rows"] = rows;
+
+            var text = _textService.Read()
+               .Where(x => x.Name == "O nas")
+               .SingleOrDefault();
+
+            ViewData["Text"] = text.Content;
 
             return View(montages);
         }
+
+        [Route("Okna")]
+        public ActionResult<IList<Product>> Windows()
+        {
+            var windows = _productService.Read()
+                .Select(x => new Product()
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Category = x.Category,
+                    Description = x.Description,
+                    ImageName = x.ImageName,
+                    ImageSrc = String.Format("{0}://{1}{2}/img/{3}", Request.Scheme, Request.Host, Request.PathBase, x.ImageName)
+                })
+                .Where(x => x.Category==Category.Okna)
+                .ToList();
+            
+
+            return View(windows);
+        }
+
+        [Route("Drzwi")]
+        public ActionResult<IList<Product>> Doors()
+        {
+            var doors = _productService.Read()
+                .Select(x => new Product()
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Category = x.Category,
+                    Description = x.Description,
+                    ImageName = x.ImageName,
+                    ImageSrc = String.Format("{0}://{1}{2}/img/{3}", Request.Scheme, Request.Host, Request.PathBase, x.ImageName)
+                })
+                .Where(x => x.Category == Category.Drzwi)
+                .ToList();
+
+
+            return View(doors);
+        }
+
+        [Route("Bramy")]
+        public ActionResult<IList<Product>> Gates()
+        {
+            var gates = _productService.Read()
+                .Select(x => new Product()
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Category = x.Category,
+                    Description = x.Description,
+                    ImageName = x.ImageName,
+                    ImageSrc = String.Format("{0}://{1}{2}/img/{3}", Request.Scheme, Request.Host, Request.PathBase, x.ImageName)
+                })
+                .Where(x => x.Category == Category.Bramy)
+                .ToList();
+
+
+            return View(gates);
+        }
+
+        [Route("Rolety")]
+        public ActionResult<IList<Product>> Blinds()
+        {
+            var blinds = _productService.Read()
+                .Select(x => new Product()
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Category = x.Category,
+                    Description = x.Description,
+                    ImageName = x.ImageName,
+                    ImageSrc = String.Format("{0}://{1}{2}/img/{3}", Request.Scheme, Request.Host, Request.PathBase, x.ImageName)
+                })
+                .Where(x => x.Category == Category.Rolety)
+                .ToList();
+
+
+            return View(blinds);
+        }
+
 
         public IActionResult Privacy()
         {

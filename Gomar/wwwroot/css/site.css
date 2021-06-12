@@ -80,3 +80,7 @@ body {
     display: block;
     /* Other styles here */
 }
+
+tbody{
+    font-weight:400;
+}

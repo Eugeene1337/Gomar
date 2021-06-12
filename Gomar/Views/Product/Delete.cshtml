@@ -1,0 +1,47 @@
+﻿@model Gomar.Models.Product
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Usunięcie</h1>
+
+<h3>Czy jesteś pewny, że chcesz usunąć ten element?</h3>
+<div>
+    <hr />
+    
+    <dl class="row">
+        <dt class="col-sm-2">
+            <a>Obrazek</a>
+        </dt>
+        <dd class="col-sm-10">
+            <p><img style='width:200px;' src="@Url.Content(Model.ImageSrc)"></p>
+        </dd>
+        <dt class="col-sm-2">
+            <a>Nazwa</a>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            <a>Kategoria</a>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Category)
+        </dd>
+        <dt class="col-sm-2">
+            <a>Opis</a>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="submit" value="Usuń" class="btn btn-danger" />
+        <button type="button" class="btn btn-outline-primary btn-sm px-3 py-2" onclick="location.href='@Url.Action("Index", "Product")'">
+            Powrót do listy
+        </button>
+    </form>
+</div>

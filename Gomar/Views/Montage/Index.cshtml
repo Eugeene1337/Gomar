@@ -15,7 +15,7 @@
     <thead table-light>
         <tr>
             <th>
-                <a>Obraz</a>
+                <a>Obrazek</a>
             </th>
             <th>
                 <a>Nazwa</a>
@@ -27,12 +27,12 @@
             <th></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody style="font-weight: 400;">
         @foreach (var item in Model)
         {
         <tr>
             <td>
-                <p><img style='width:200px; height:150px;' src="@Url.Content(item.ImageSrc)"></p>
+                <p><img style='width:250px;' src="@Url.Content(item.ImageSrc)"></p>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ImageName)

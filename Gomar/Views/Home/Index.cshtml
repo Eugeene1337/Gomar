@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<Gomar.Models.Montage>
+
 @{
     Layout = null;
 }
@@ -33,12 +34,52 @@
                 </button>
                 <div class="navbar-collapse collapse justify-content-between " style="font-size: 18px;">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Montage" asp-action="Index">Montaże</a>
+                        <!-- Navbar dropdown -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark"
+                               href="#"
+                               id="navbarDropdown"
+                               role="button"
+                               data-mdb-toggle="dropdown"
+                               aria-expanded="false">
+                                Oferta
+                            </a>
+                            <!-- Dropdown menu -->
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Windows">Okna</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Doors">Drzwi</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Gates">Bramy</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Blinds">Rolety</a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Nasze realizacje</a>
+                            <a class="nav-link text-dark" href="#about-us">O nas</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="#our-projects">Nasze realizacje</a>
+                        </li>
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Montage" asp-action="Index">Montaże</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Artykuły</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Text" asp-action="Index">Tekst</a>
+                            </li>
+                        }
+
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
@@ -138,16 +179,7 @@
                         <h2 class="text-white">O nas</h2>
                         <div class=" mb-4" style="width: 90px; height: 3px; background: #C52831; margin: 0 ;"></div>
                         <p class="description text-white">
-                            Firma GOMAR oferuje sprzedaż i montaż wysokiej klasy stolarki budowlanej.
-                            W ofercie m. in. okna PCV i ALU, drzwi zewnętrzne i wewnętrzne, rolety zewnętrzne i wewnętrzne, żaluzje fasadowe, refleksole, bramy garażowe, parapety.
-                            Oferujemy profesjonalny montaż zgodny z najnowszymi technikami i wymogami.
-                            Współpracujemy ze sprawdzonymi i cenionymi na rynku producentami takimi jak VEKA.
-                            Klasa RAL A* - podstawowa cecha dobrych profili
-                            VEKA posiada w swojej ofercie profili okiennych do budynków mieszkalnych i biurowych WYŁĄCZNIE systemy zaliczane zgodnie z PN-EN 12608 do NAJWYŻSZEJ klasy A**.
-                        </p>
-                        <p class="description text-white">
-                            Ścianki zewnętrzne profili w klasie A posiadają grubość 3mm (z tolerancją 0,2 mm). Jest to kluczowy parametr dla optymalnej ochrony domowników przed chłodem i hałasem, jednocześnie zapewniający oknom stabilność i trwałość. Profile o cieńszych ściankach, zaliczane do niższych klas B i C, nie posiadają już tak wysokiej odporności na uszkodzenia i są o około 10 do 20% bardziej podatne na pękanie naroży.
-                            Zapraszamy do kontaktu.
+                            @ViewData["Text"]
                         </p>
                     </div>
                 </div>

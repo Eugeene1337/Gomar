@@ -1,0 +1,37 @@
+﻿@model Gomar.Models.Text
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Dodanie</h1>
+
+<h4>Tekst</h4>
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Nazwa</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Content" class="control-label">Tekst</label>
+                <textarea asp-for="Content" class="form-control" rows="12"></textarea>
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Dodaj" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <button type="button" class="btn btn-outline-primary btn-sm px-3 py-2" onclick="location.href='@Url.Action("Index", "Text")'">
+        Powrót do listy
+    </button>
+</div>
+

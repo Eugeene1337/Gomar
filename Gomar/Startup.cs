@@ -38,6 +38,7 @@ namespace Gomar
             services.AddSingleton<IDatabaseSettings>(x => x.GetRequiredService<IOptions<DatabaseSettings>>().Value);
             services.AddSingleton<ProductService>();
             services.AddSingleton<MontageService>();
+            services.AddSingleton<TextService>();
 
             services.AddAuthentication(options =>
             {

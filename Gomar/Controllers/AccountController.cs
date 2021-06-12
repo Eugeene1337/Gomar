@@ -10,6 +10,7 @@ namespace Gomar.Controllers
 {
     public class AccountController : Controller
     {
+        [Route("Admin")]
         public IActionResult Login()
         {
             if (!HttpContext.User.Identity.IsAuthenticated)

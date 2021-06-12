@@ -75,7 +75,7 @@ namespace Gomar.Controllers
         }
 
         [HttpGet]
-        public ActionResult Delete(string? id)
+        public ActionResult Delete(string id)
         {
             if (id == null)
             {
