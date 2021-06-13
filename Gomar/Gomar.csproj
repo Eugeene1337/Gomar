@@ -11,8 +11,4 @@
     <PackageReference Include="MongoDB.Driver" Version="2.12.3" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\Admn\Controllers\" />
-  </ItemGroup>
-
 </Project>

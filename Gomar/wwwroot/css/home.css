@@ -6,11 +6,11 @@ header,
 }
 
 #intro {
-    background: url("/img/bg.jpg") no-repeat center center fixed;
+    background: url("/img/Montage0211848622.jpg") no-repeat center center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    background-size: cover;
+    background-size: 100% cover;
 }
 
 .navbar {
@@ -60,4 +60,10 @@ a.anchor {
 
 .width-auto {
     width: auto;
+}
+
+.footer {
+
+    width: 100%;
+    white-space: nowrap;
 }
