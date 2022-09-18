@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using Gomar.Models;
+using Gomar.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,23 +12,41 @@ namespace Gomar.Controllers
 {
     public class AccountController : Controller
     {
-        [Route("Admin")]
-        public IActionResult Login()
+        UserManager _userManager;
+
+        public AccountController(UserManager userManager)
         {
-            if (!HttpContext.User.Identity.IsAuthenticated)
-            {
-                return Challenge(OpenIdConnectDefaults.AuthenticationScheme);
-            }
-            return RedirectToAction("Index", "Home");
+            _userManager = userManager;
         }
 
+        [Route("Admin")]
+        public IActionResult LogIn()
+        {
+            return View();
+        }
+        
+        [HttpPost]
+        public IActionResult LogIn(LogInViewModel form)
+        {
+            if (!ModelState.IsValid)
+                return View(form);
+            try
+            {
+                _userManager.SignIn(this.HttpContext, form.Email, form.Password);
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("summary", ex.Message);
+                return View(form);
+            }
+        }
+
+        [Route("Logout")]
         public IActionResult Logout()
         {
-            return new SignOutResult(new[]
-            {
-              OpenIdConnectDefaults.AuthenticationScheme,
-              CookieAuthenticationDefaults.AuthenticationScheme
-            });
+            _userManager.SignOut(this.HttpContext);
+            return RedirectToAction("Index", "Home");
         }
     }
 }
