@@ -25,7 +25,6 @@
             <div class="container">
                 <a class="brand navbar-brand ms-5" style="font-size: 22px;" asp-area="" asp-controller="Home" asp-action="Index">
                     <img src="~/img/logo.png" height="55" alt="Gomar" />
-                    Marcin Górka
                 </a>
                 <!-- Toggle button -->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -34,53 +33,52 @@
                 </button>
                 <div class="navbar-collapse collapse justify-content-between " style="font-size: 18px;">
                     <ul class="navbar-nav mr-auto">
-                        <!-- Navbar dropdown -->
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Windows">Okna</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Doors">Drzwi</a>
+                        </li>        
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Gates">Bramy</a>
+                        </li>        
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Blinds">Rolety</a>
+                        </li>        
+                        <li class="nav-item">
+                            <a class="nav-link" href="#about-us">O nas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#our-projects">Nasze realizacje</a>
+                        </li>
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-dark"
+                            <a class="nav-link dropdown-toggle"
                                href="#"
                                id="navbarDropdown"
                                role="button"
                                data-mdb-toggle="dropdown"
                                aria-expanded="false">
-                                Oferta
+                                Edycja
                             </a>
                             <!-- Dropdown menu -->
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li>
-                                    <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Windows">Okna</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Montage" asp-action="Index">Montaże</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Doors">Drzwi</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Product" asp-action="Index">Artykuły</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Gates">Bramy</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Blinds">Rolety</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Text" asp-action="Index">Tekst</a>
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" href="#about-us">O nas</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" href="#our-projects">Nasze realizacje</a>
-                        </li>
-
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Montage" asp-action="Index">Montaże</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Artykuły</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Text" asp-action="Index">Tekst</a>
-                        </li>
                         }
                         <li>
-                            <a class="nav-link text-dark" href="tel:577399488"><i class="fas fa-phone-alt"></i> 577 399 488</a>
+                            <a class="nav-link" href="tel:577399488"><i class="fas fa-phone-alt"></i> 577 399 488</a>
                         </li>
                         <li>
                             <a class="nav-link text-dark"><i class="fas fa-envelope"></i> biuro@oknagomar.pl</a>

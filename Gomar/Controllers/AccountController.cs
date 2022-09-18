@@ -24,20 +24,21 @@ namespace Gomar.Controllers
         {
             return View();
         }
-        
+
+        [Route("Admin")]
         [HttpPost]
-        public IActionResult LogIn(LogInViewModel form)
+        public async Task<IActionResult> LogInAsync(LogInViewModel form)
         {
             if (!ModelState.IsValid)
                 return View(form);
             try
             {
-                _userManager.SignIn(this.HttpContext, form.Email, form.Password);
+                await _userManager.SignIn(this.HttpContext, form.Email, form.Password);
                 return RedirectToAction("Index", "Home");
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError("summary", ex.Message);
+                ViewData["ValidationSummary"] = ex.Message;
                 return View(form);
             }
         }

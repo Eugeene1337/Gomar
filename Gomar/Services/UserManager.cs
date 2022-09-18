@@ -1,6 +1,7 @@
 ﻿using Gomar.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Security.Authentication;
 using System.Security.Claims;
 
 namespace Gomar.Services
@@ -13,7 +14,7 @@ namespace Gomar.Services
             _adminUser = adminUser;
         }
 
-        public async void SignIn(HttpContext httpContext, string email, string password)
+        public async Task SignIn(HttpContext httpContext, string email, string password)
         {
             if(email == _adminUser.Email && password == _adminUser.Password)
             {
@@ -22,7 +23,10 @@ namespace Gomar.Services
 
                 await httpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
             }
-            // throw ex with message
+            else
+            {
+                throw new AuthenticationException("Niepoprawny email lub hasło");
+            }
         }
 
         public async void SignOut(HttpContext httpContext)

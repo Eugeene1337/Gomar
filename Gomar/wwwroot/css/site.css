@@ -7,6 +7,13 @@ a.navbar-brand {
     word-break: break-all;
 }
 
+ul li a {
+    color: #262626 !important;
+}
+
+    ul li a:hover {
+        color: #C52831 !important;
+    }
 /* Provide sufficient contrast against white background */
 a {
     color: #0366d6;
@@ -81,6 +88,6 @@ body {
     /* Other styles here */
 }
 
-tbody{
-    font-weight:400;
+tbody {
+    font-weight: 400;
 }

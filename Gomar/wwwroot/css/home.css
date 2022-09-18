@@ -21,6 +21,15 @@ header,
     font-size: 22px;
 }
 
+ul li a {
+    color: #262626 !important;
+}
+
+ul li a:hover {
+    color: #C52831 !important;
+}
+
+
 .bold {
     border: 5px solid white;
 }
@@ -49,14 +58,13 @@ a.anchor {
     height: 0;
 }
 
-    .map-container-6 iframe {
-        left: 0;
-        top: 0;
-        height: 100%;
-        width: 100%;
-        position: absolute;
-    }
-
+.map-container-6 iframe {
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}     
 
 .width-auto {
     width: auto;
