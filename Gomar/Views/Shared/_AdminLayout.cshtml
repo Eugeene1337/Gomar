@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Page_Title"] - Panel Administracyjny</title>
+    <meta name="color-scheme" content="light dark" />
+    <link rel="stylesheet" class="meta-css-dark" href="~/css/bootstrap-dark.min.css" media="(prefers-color-scheme: dark)" />
+    <link rel="stylesheet" class="meta-css-light" href="~/css/bootstrap.min.css" media="(prefers-color-scheme: no-preference), (prefers-color-scheme: light)" />
+    <link rel="stylesheet" href="~/css/easymde/easymde.min.css" />
+    <link rel="stylesheet" class="meta-css-dark" href="~/css/easymde/easymde-dark.min.css" media="(prefers-color-scheme: dark)" />
+    <link rel="stylesheet" href="~/css/jquery-ui.min.css" />
+    <link rel="stylesheet" href="~/css/admin.css" />
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap justify-content-start p-0 py-3 shadow">
+        <div class="navbar-brand sidebar-width">
+            <button id="sidebarToggle" class="navbar-toggler ml-2 collapsed" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="mr-0 pl-1" href="@Url.Action("Index", "Admin")">Panel Administracyjny</a>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <nav id="sidebar-wrapper" class="sidebar-width d-md-block bg-light sidebar sidebar-wrapper">
+        <div class="sidebar-sticky pt-3">
+            @Html.Partial("Components/AdminSideBar")
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <div class="d-flex" id="wrapper">
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <main role="main" class="px-md-4">
+
+                    @RenderBody()
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/jquery.validate.js"></script>
+    <script src="~/js/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/jquery-ui.min.js"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
