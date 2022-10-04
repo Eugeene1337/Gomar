@@ -1,14 +1,8 @@
 ﻿using Gomar.Models;
 using Gomar.Services;
+using Gomar.Utils;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Gomar.Controllers
 {
@@ -49,7 +43,7 @@ namespace Gomar.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult<Product>> Create(Product product)
         {
-            product.ImageName = await SaveImage(product.ImageFile);
+            product.ImageName = await ImageHelper.SaveImage(product.ImageFile, _hostEnvironment);
             if (ModelState.IsValid)
             {
                 _productService.Create(product);
@@ -69,8 +63,8 @@ namespace Gomar.Controllers
             
             if (product.ImageFile != null)
             {
-                DeleteImage(oldProduct.ImageName);
-                product.ImageName = await SaveImage(product.ImageFile);
+                ImageHelper.DeleteImage(oldProduct.ImageName, _hostEnvironment);
+                product.ImageName = await ImageHelper.SaveImage(product.ImageFile, _hostEnvironment);
             }
             else
             {
@@ -107,30 +101,9 @@ namespace Gomar.Controllers
         public IActionResult DeleteConfirmed(string id)
         {
             var product = _productService.Find(id);
-            DeleteImage(product.ImageName);
+            ImageHelper.DeleteImage(product.ImageName, _hostEnvironment);
             _productService.Delete(id);
             return RedirectToAction("Index");
-        }
-
-        [NonAction]
-        public async Task<string> SaveImage(IFormFile imageFile)
-        {
-            string imageName = new String(Path.GetFileNameWithoutExtension(imageFile.FileName).Take(10).ToArray()).Replace(' ', '-');
-            imageName = imageName + DateTime.Now.ToString("yymmssfff") + Path.GetExtension(imageFile.FileName);
-            var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "img", imageName);
-            using (var fileStream = new FileStream(imagePath, FileMode.Create))
-            {
-                await imageFile.CopyToAsync(fileStream);
-            }
-            return imageName;
-        }
-
-        [NonAction]
-        public void DeleteImage(string imageName)
-        {
-            var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "img", imageName);
-            if (System.IO.File.Exists(imagePath))
-                System.IO.File.Delete(imagePath);
         }
     }
 }
