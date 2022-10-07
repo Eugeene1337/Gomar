@@ -1,6 +1,5 @@
 ﻿using Gomar.Models;
 using Gomar.Services;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Gomar.Controllers

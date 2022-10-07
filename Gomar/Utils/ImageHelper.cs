@@ -14,7 +14,7 @@
             return imageName;
         }
 
-        public void DeleteImage(string imageName, IWebHostEnvironment hostEnvironment)
+        public static void DeleteImage(string imageName, IWebHostEnvironment hostEnvironment)
         {
             var imagePath = Path.Combine(hostEnvironment.WebRootPath, "img", imageName);
             if (System.IO.File.Exists(imagePath))
