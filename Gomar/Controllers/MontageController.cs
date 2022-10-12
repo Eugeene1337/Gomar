@@ -29,15 +29,16 @@ namespace Gomar.Controllers
                 .ToList();
 
             return View(montages);
-        } 
+        }
+
         [HttpGet]
         public ActionResult Create() => View();
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult<Montage>> Create(Montage montage)
+        public ActionResult<Montage> Create(Montage montage)
         {
-            montage.ImageName = await ImageHelper.SaveImage(montage.ImageFile, _hostEnvironment);
+            montage.ImageName = ImageHelper.SaveImage(montage.ImageFile, _hostEnvironment);
             if (ModelState.IsValid)
             {
                 _montageService.Create(montage);
@@ -51,13 +52,13 @@ namespace Gomar.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(Montage montage)
+        public ActionResult Edit(Montage montage)
         {
             var oldMontage = _montageService.Find(montage.Id);
             if (montage.ImageFile != null)
             {
                 ImageHelper.DeleteImage(oldMontage.ImageName, _hostEnvironment);
-                montage.ImageName = await ImageHelper.SaveImage(montage.ImageFile, _hostEnvironment);
+                montage.ImageName = ImageHelper.SaveImage(montage.ImageFile, _hostEnvironment);
             }
 
             if (ModelState.IsValid)

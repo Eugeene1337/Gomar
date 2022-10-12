@@ -1,9 +1,0 @@
-﻿@if (User.Identity.IsAuthenticated)
-{
-    <ul class="navbar-nav">
-        <li>
-            <a onclick="document.getElementById('logout_form').submit();" style="cursor: pointer;">Wyłoguj</a>
-        </li>
-    </ul>
-    <form asp-controller="Admin" asp-action="Logout" method="post" id="logout_form"></form>
-}

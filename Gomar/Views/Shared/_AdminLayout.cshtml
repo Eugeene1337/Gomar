@@ -14,23 +14,14 @@
 </head>
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap justify-content-start p-0 py-3 shadow">
-        <div class="navbar-brand sidebar-width">
-            <button id="sidebarToggle" class="navbar-toggler ml-2 collapsed" type="button">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <a class="mr-0 pl-1" href="@Url.Action("Index", "Admin")">Panel Administracyjny</a>
-        </div>
-        <button class="btn btn-primary float-right" type="button" onclick="document.getElementById('logout_form').submit();">
-                Wyłoguj
-        </button>
-         <form asp-controller="Admin" asp-action="Logout" method="post" id="logout_form"></form>
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap justify-content-between p-0 py-3 shadow">
+        <partial name="../Shared/Components/_AdminNavbar" />
     </nav>
 
     <!-- Sidebar -->
     <nav id="sidebar-wrapper" class="sidebar-width d-md-block bg-light sidebar sidebar-wrapper">
         <div class="sidebar-sticky pt-3">
-            @Html.Partial("Components/AdminSideBar")
+            <partial name="../Shared/Components/_AdminSidebar" />
         </div>
     </nav>
 
@@ -39,7 +30,6 @@
         <div id="page-content-wrapper">
             <div class="container-fluid">
                 <main role="main" class="px-md-4">
-
                     @RenderBody()
                 </main>
             </div>

@@ -1,0 +1,41 @@
+﻿<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="brand navbar-brand ms-5" style="font-size: 22px;" asp-controller="Home" asp-action="Index">
+                    <img src="~/img/logo.png" height="55" alt="Gomar" />
+                </a>
+                <!-- Toggle button -->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse justify-content-between " style="font-size: 18px;">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Windows">Okna</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Doors">Drzwi</a>
+                        </li>        
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Gates">Bramy</a>
+                        </li>        
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Blinds">Rolety</a>
+                        </li>        
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">O nas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Nasze realizacje</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="tel:577399488"><i class="fas fa-phone-alt"></i> 577 399 488</a>
+                        </li>
+                        <li>
+                            <a class="nav-link text-dark"><i class="fas fa-envelope"></i> biuro@oknagomar.pl</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>

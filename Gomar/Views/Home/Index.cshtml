@@ -51,32 +51,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#our-projects">Nasze realizacje</a>
                         </li>
-
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle"
-                               href="#"
-                               id="navbarDropdown"
-                               role="button"
-                               data-mdb-toggle="dropdown"
-                               aria-expanded="false">
-                                Edycja
-                            </a>
-                            <!-- Dropdown menu -->
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li>
-                                    <a class="dropdown-item" asp-area="" asp-controller="Montage" asp-action="Index">Montaże</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" asp-area="" asp-controller="Product" asp-action="Index">Artykuły</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" asp-area="" asp-controller="Text" asp-action="Index">Tekst</a>
-                                </li>
-                            </ul>
-                        </li>
-                        }
                         <li>
                             <a class="nav-link" href="tel:577399488"><i class="fas fa-phone-alt"></i> 577 399 488</a>
                         </li>
@@ -84,7 +58,6 @@
                             <a class="nav-link text-dark"><i class="fas fa-envelope"></i> biuro@oknagomar.pl</a>
                         </li>
                     </ul>
-                    <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>

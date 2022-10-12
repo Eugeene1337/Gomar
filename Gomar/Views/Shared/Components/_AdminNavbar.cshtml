@@ -1,0 +1,12 @@
+﻿<div class="navbar-brand sidebar-width">
+            <button id="sidebarToggle" class="navbar-toggler ml-2 collapsed" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="mr-0 pl-1" href="@Url.Action("Main", "Admin")">Panel Administracyjny</a>
+        </div>
+        <div>
+            <button class="btn btn-primary mx-5 px-3" type="button" onclick="document.getElementById('logout_form').submit();">
+                Wyłoguj
+            </button>
+        <form asp-controller="Admin" asp-action="Logout" method="post" id="logout_form"></form>
+        </div>

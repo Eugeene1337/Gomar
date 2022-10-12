@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Gomar.Models;
+﻿using Gomar.Models;
 using MongoDB.Driver;
 
 namespace Gomar.Services

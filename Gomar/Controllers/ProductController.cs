@@ -41,9 +41,9 @@ namespace Gomar.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult<Product>> Create(Product product)
+        public ActionResult<Product> Create(Product product)
         {
-            product.ImageName = await ImageHelper.SaveImage(product.ImageFile, _hostEnvironment);
+            product.ImageName = ImageHelper.SaveImage(product.ImageFile, _hostEnvironment);
             if (ModelState.IsValid)
             {
                 _productService.Create(product);
@@ -57,14 +57,14 @@ namespace Gomar.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(Product product)
+        public ActionResult Edit(Product product)
         {
             var oldProduct = _productService.Find(product.Id);
             
             if (product.ImageFile != null)
             {
                 ImageHelper.DeleteImage(oldProduct.ImageName, _hostEnvironment);
-                product.ImageName = await ImageHelper.SaveImage(product.ImageFile, _hostEnvironment);
+                product.ImageName = ImageHelper.SaveImage(product.ImageFile, _hostEnvironment);
             }
             else
             {
