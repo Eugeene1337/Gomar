@@ -1,9 +1,10 @@
 ﻿using Gomar.Models;
+using Gomar.Services.Interfaces;
 using MongoDB.Driver;
 
 namespace Gomar.Services
 {
-    public class MontageService
+    public class MontageService : IMontageService
     {
         private readonly IMongoCollection<Montage> _montages;
 

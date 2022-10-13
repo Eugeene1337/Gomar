@@ -1,6 +1,5 @@
 ﻿using Gomar.Models;
-using Gomar.Services;
-using Gomar.Utils;
+using Gomar.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,13 +9,13 @@ namespace Gomar.Controllers
     public class ProductController : Controller
     {
 
-        private readonly ProductService _productService;
-        private readonly IWebHostEnvironment _hostEnvironment;
+        private readonly IProductService _productService;
+        private readonly IImageService _imageService;
 
-        public ProductController(ProductService productService, IWebHostEnvironment hostEnvironment)
+        public ProductController(IProductService productService, IImageService imageService)
         {
             _productService = productService;
-            _hostEnvironment = hostEnvironment;
+            _imageService = imageService;
         }
 
         public ActionResult<IList<Product>> Index()
@@ -29,7 +28,6 @@ namespace Gomar.Controllers
                     Category = x.Category,
                     Description = x.Description,
                     ImageName = x.ImageName,
-                    ImageSrc = String.Format("{0}://{1}{2}/img/{3}", Request.Scheme, Request.Host, Request.PathBase, x.ImageName)
                 })
                 .ToList();
 
@@ -43,7 +41,7 @@ namespace Gomar.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult<Product> Create(Product product)
         {
-            product.ImageName = ImageHelper.SaveImage(product.ImageFile, _hostEnvironment);
+            product.ImageName = _imageService.SaveImage(product.ImageFile);
             if (ModelState.IsValid)
             {
                 _productService.Create(product);
@@ -63,8 +61,8 @@ namespace Gomar.Controllers
             
             if (product.ImageFile != null)
             {
-                ImageHelper.DeleteImage(oldProduct.ImageName, _hostEnvironment);
-                product.ImageName = ImageHelper.SaveImage(product.ImageFile, _hostEnvironment);
+                _imageService.DeleteImage(oldProduct.ImageName);
+                product.ImageName = _imageService.SaveImage(product.ImageFile);
             }
             else
             {
@@ -92,7 +90,6 @@ namespace Gomar.Controllers
             {
                 return NotFound();
             }
-            product.ImageSrc = String.Format("{0}://{1}{2}/img/{3}", Request.Scheme, Request.Host, Request.PathBase, product.ImageName);
             return View(product);
         }
 
@@ -101,7 +98,7 @@ namespace Gomar.Controllers
         public IActionResult DeleteConfirmed(string id)
         {
             var product = _productService.Find(id);
-            ImageHelper.DeleteImage(product.ImageName, _hostEnvironment);
+            _imageService.DeleteImage(product.ImageName);
             _productService.Delete(id);
             return RedirectToAction("Index");
         }

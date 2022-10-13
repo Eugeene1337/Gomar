@@ -1,9 +1,10 @@
 ﻿using Gomar.Models;
+using Gomar.Services.Interfaces;
 using MongoDB.Driver;
 
 namespace Gomar.Services
 {
-    public class ProductService
+    public class ProductService : IProductService
     {
         private readonly IMongoCollection<Product> _products;
 

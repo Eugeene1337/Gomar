@@ -1,12 +1,8 @@
 ﻿using Gomar.Models;
 using Gomar.Services;
+using Gomar.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Gomar.Controllers
 {
@@ -14,13 +10,11 @@ namespace Gomar.Controllers
     public class TextController : Controller
     {
 
-        private readonly TextService _textService;
-        private readonly IWebHostEnvironment _hostEnvironment;
+        private readonly ITextService _textService;
 
-        public TextController(TextService textService, IWebHostEnvironment hostEnvironment)
+        public TextController(ITextService textService)
         {
             _textService = textService;
-            _hostEnvironment = hostEnvironment;
         }
 
         public ActionResult<IList<Text>> Index() => View(_textService.Read());

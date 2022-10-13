@@ -190,7 +190,7 @@
                         <!--Grid column-->
                         <div class="col-lg-4 col-md-12 mb-4">
                             <div class="view overlay z-depth-1-half">
-                                <img src="@Model.ElementAt(i+j).ImageSrc" class="img-fluid hover-shadow" alt="">
+                                <img src="@(String.Format("{0}/img/{1}", AppSettings.ApplicationUrl, Model.ElementAt(i+j).ImageName))" class="img-fluid hover-shadow" alt="">
                                 <a>
                                     <div class="rgba-blue-light"></div>
                                 </a>

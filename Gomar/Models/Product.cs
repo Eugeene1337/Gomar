@@ -1,18 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using System.ComponentModel.DataAnnotations;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace Gomar.Models
 {
-    public enum Category
-    {
-        Okna, Drzwi, Bramy, Rolety
-    }
     public class Product
     {
         [BsonId]
@@ -26,7 +17,5 @@ namespace Gomar.Models
         public string ImageName { get; set; }
         [BsonIgnore]
         public IFormFile ImageFile { get; set; }
-        [BsonIgnore]
-        public string ImageSrc { get; set; }
     }
 }

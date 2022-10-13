@@ -1,4 +1,5 @@
 ﻿using Gomar.Models;
+using Gomar.Models.ViewModels;
 using Gomar.Services;
 using Microsoft.AspNetCore.Mvc;
 

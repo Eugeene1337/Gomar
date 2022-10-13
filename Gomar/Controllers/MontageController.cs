@@ -1,6 +1,7 @@
-﻿using Gomar.Models;
-using Gomar.Services;
-using Gomar.Utils;
+﻿using AutoMapper;
+using Gomar.Models;
+using Gomar.Models.ViewModels;
+using Gomar.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,14 +10,17 @@ namespace Gomar.Controllers
     [Authorize]
     public class MontageController : Controller
     {
-        private readonly MontageService _montageService;
-        private readonly IWebHostEnvironment _hostEnvironment;
+        private readonly IMontageService _montageService;
+        private readonly IImageService _imageService;
+        private readonly IMapper _mapper;
 
-        public MontageController(MontageService montageService, IWebHostEnvironment hostEnvironment)
+        public MontageController(IMontageService montageService, IImageService imageService, IMapper mapper)
         {
             _montageService = montageService;
-            _hostEnvironment = hostEnvironment;
+            _imageService = imageService;
+            _mapper = mapper;
         }
+
         public ActionResult<IList<Montage>> Index()
         {
             var montages = _montageService.Read()
@@ -24,7 +28,6 @@ namespace Gomar.Controllers
                 {
                     Id = x.Id,
                     ImageName = x.ImageName,
-                    ImageSrc = String.Format("{0}://{1}{2}/img/{3}", Request.Scheme, Request.Host, Request.PathBase, x.ImageName)
                 })
                 .ToList();
 
@@ -36,14 +39,16 @@ namespace Gomar.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult<Montage> Create(Montage montage)
+        public ActionResult<Montage> Create(MontageViewModel montageViewModel)
         {
-            montage.ImageName = ImageHelper.SaveImage(montage.ImageFile, _hostEnvironment);
+            var montage = _mapper.Map<Montage>(montageViewModel);
+            montage.ImageName = _imageService.SaveImage(montage.ImageFile);
             if (ModelState.IsValid)
             {
                 _montageService.Create(montage);
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+            return View(montageViewModel);
         }
 
         [HttpGet]
@@ -57,8 +62,8 @@ namespace Gomar.Controllers
             var oldMontage = _montageService.Find(montage.Id);
             if (montage.ImageFile != null)
             {
-                ImageHelper.DeleteImage(oldMontage.ImageName, _hostEnvironment);
-                montage.ImageName = ImageHelper.SaveImage(montage.ImageFile, _hostEnvironment);
+                _imageService.DeleteImage(oldMontage.ImageName);
+                montage.ImageName = _imageService.SaveImage(montage.ImageFile);
             }
 
             if (ModelState.IsValid)
@@ -81,7 +86,6 @@ namespace Gomar.Controllers
             {
                 return NotFound();
             }
-            montage.ImageSrc = String.Format("{0}://{1}{2}/img/{3}", Request.Scheme, Request.Host, Request.PathBase, montage.ImageName);
             return View(montage);
         }
 
@@ -90,7 +94,7 @@ namespace Gomar.Controllers
         public IActionResult DeleteConfirmed(string id)
         {
             var montage = _montageService.Find(id);
-            ImageHelper.DeleteImage(montage.ImageName, _hostEnvironment);
+            _imageService.DeleteImage(montage.ImageName);
             _montageService.Delete(id);
             return RedirectToAction("Index");
         }

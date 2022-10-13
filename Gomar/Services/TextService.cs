@@ -1,9 +1,10 @@
 ﻿using Gomar.Models;
+using Gomar.Services.Interfaces;
 using MongoDB.Driver;
 
 namespace Gomar.Services
 {
-    public class TextService
+    public class TextService : ITextService
     {
         private readonly IMongoCollection<Text> _texts;
 

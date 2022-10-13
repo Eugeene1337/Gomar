@@ -1,5 +1,7 @@
 ﻿using Gomar.Models;
+using Gomar.Models.ViewModels;
 using Gomar.Services;
+using Gomar.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -8,16 +10,16 @@ namespace Gomar.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly MontageService _montageService;
-        private readonly ProductService _productService;
-        private readonly TextService _textService;
-        
-        public HomeController(ILogger<HomeController> logger, MontageService montageService, ProductService productService, TextService textService)
+        private readonly IMontageService _montageService;
+        private readonly IProductService _productService;
+        private readonly ITextService _textService;
+
+        public HomeController(ILogger<HomeController> logger, IMontageService montageService, IProductService productService, ITextService textService)
         {
+            _logger = logger;
             _montageService = montageService;
             _productService = productService;
             _textService = textService;
-            _logger = logger;
         }
 
         public ActionResult<IList<Montage>> Index()
@@ -26,8 +28,7 @@ namespace Gomar.Controllers
                 .Select(x => new Montage()
                 {
                     Id = x.Id,
-                    ImageName = x.ImageName,
-                    ImageSrc = String.Format("{0}://{1}{2}/img/{3}", Request.Scheme, Request.Host, Request.PathBase, x.ImageName)
+                    ImageName = x.ImageName,                
                 })
                 .ToList();
 
@@ -51,7 +52,6 @@ namespace Gomar.Controllers
                     Category = x.Category,
                     Description = x.Description,
                     ImageName = x.ImageName,
-                    ImageSrc = String.Format("{0}://{1}{2}/img/{3}", Request.Scheme, Request.Host, Request.PathBase, x.ImageName)
                 })
                 .Where(x => x.Category==Category.Okna)
                 .ToList();
@@ -71,7 +71,6 @@ namespace Gomar.Controllers
                     Category = x.Category,
                     Description = x.Description,
                     ImageName = x.ImageName,
-                    ImageSrc = String.Format("{0}://{1}{2}/img/{3}", Request.Scheme, Request.Host, Request.PathBase, x.ImageName)
                 })
                 .Where(x => x.Category == Category.Drzwi)
                 .ToList();
@@ -91,7 +90,6 @@ namespace Gomar.Controllers
                     Category = x.Category,
                     Description = x.Description,
                     ImageName = x.ImageName,
-                    ImageSrc = String.Format("{0}://{1}{2}/img/{3}", Request.Scheme, Request.Host, Request.PathBase, x.ImageName)
                 })
                 .Where(x => x.Category == Category.Bramy)
                 .ToList();
@@ -111,7 +109,6 @@ namespace Gomar.Controllers
                     Category = x.Category,
                     Description = x.Description,
                     ImageName = x.ImageName,
-                    ImageSrc = String.Format("{0}://{1}{2}/img/{3}", Request.Scheme, Request.Host, Request.PathBase, x.ImageName)
                 })
                 .Where(x => x.Category == Category.Rolety)
                 .ToList();

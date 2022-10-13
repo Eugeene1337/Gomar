@@ -17,12 +17,6 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.ImageName)
         </dd>
-        <dt class="col-sm-2">
-            <a>Ścieżka</a>
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ImageSrc)
-        </dd>  
 </dl>
 
     <form asp-action="Delete">
@@ -37,6 +31,6 @@
 <br/>
 <tr>
     <td>
-        <p><img style='width:390px; height:300px;' src="@Url.Content(Model.ImageSrc)"></p>
+        <p><img style='width:390px; height:300px;' src="@Url.Content(@Url.Content(String.Format("{0}/img/{1}", AppSettings.ApplicationUrl, Model.ImageName)))"></p>
     </td>
 </tr>

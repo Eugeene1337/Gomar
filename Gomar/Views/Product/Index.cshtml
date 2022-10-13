@@ -33,7 +33,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                <p><img style='width:250px;' src="@Url.Content(item.ImageSrc)"></p>
+                <p><img style='width:250px;' src="@Url.Content(String.Format("{0}/img/{1}", AppSettings.ApplicationUrl, item.ImageName))"></p>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Category)

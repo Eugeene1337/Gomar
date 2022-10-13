@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31321.278
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gomar", "Gomar\Gomar.csproj", "{F28788C1-F880-4051-99F0-9C1C830AB81D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gomar", "Gomar\Gomar.csproj", "{F28788C1-F880-4051-99F0-9C1C830AB81D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

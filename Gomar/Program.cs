@@ -1,5 +1,8 @@
 using Gomar.Models;
+using Gomar.Models.MappingProfiles;
 using Gomar.Services;
+using Gomar.Services.Interfaces;
+using Gomar.Utils;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.Options;
 
@@ -10,9 +13,15 @@ builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection(na
 builder.Services.AddSingleton<IDatabaseSettings>(x => x.GetRequiredService<IOptions<DatabaseSettings>>().Value);
 builder.Services.Configure<AdminUser>(builder.Configuration.GetSection(nameof(AdminUser)));
 builder.Services.AddSingleton<IAdminUser>(x => x.GetRequiredService<IOptions<AdminUser>>().Value);
-builder.Services.AddSingleton<ProductService>();
-builder.Services.AddSingleton<MontageService>();
-builder.Services.AddSingleton<TextService>();
+
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IMontageService, MontageService>();
+builder.Services.AddScoped<ITextService, TextService>();
+builder.Services.AddScoped<IImageService, ImageService>();
+
+builder.Services.AddAutoMapper(typeof(MontageMappingProfile));
+builder.Services.AddAutoMapper(typeof(ProductMappingProfile));
+
 builder.Services.AddAuthentication(
     CookieAuthenticationDefaults.AuthenticationScheme
 ).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,
@@ -30,6 +39,8 @@ builder.Services.AddTransient<UserManager>();
 builder.Services.AddDistributedMemoryCache();
 
 builder.Services.AddControllersWithViews();
+
+ConfigurationHelper.Initialize(builder.Configuration);
 
 var app = builder.Build();
 
