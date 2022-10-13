@@ -38,6 +38,8 @@
                     <span asp-validation-for="ImageFile" class="text-danger"></span>
                 </div>
             </div>
+            @Html.HiddenFor(m => m.Id)
+            @Html.HiddenFor(m => m.ImageName)
             <div class="form-group">
                 <input type="submit" value="Zapisz" class="btn btn-primary " />
             </div>
