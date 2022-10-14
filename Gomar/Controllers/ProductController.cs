@@ -1,4 +1,6 @@
-﻿using Gomar.Models;
+﻿using AutoMapper;
+using Gomar.Models;
+using Gomar.Models.ViewModels;
 using Gomar.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,11 +13,13 @@ namespace Gomar.Controllers
 
         private readonly IProductService _productService;
         private readonly IImageService _imageService;
+        private readonly IMapper _mapper;
 
-        public ProductController(IProductService productService, IImageService imageService)
+        public ProductController(IProductService productService, IImageService imageService, IMapper mapper)
         {
             _productService = productService;
             _imageService = imageService;
+            _mapper = mapper;
         }
 
         public ActionResult<IList<Product>> Index()
@@ -39,8 +43,9 @@ namespace Gomar.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult<Product> Create(Product product)
+        public ActionResult<Product> Create(ProductViewModel productViewModel)
         {
+            var product = _mapper.Map<Product>(productViewModel);
             product.ImageName = _imageService.SaveImage(product.ImageFile);
             if (ModelState.IsValid)
             {
